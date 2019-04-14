@@ -1,0 +1,8 @@
+{
+  "name": "pocket",
+  "version": "0.1.0",
+  "description": "A simple state manager.",
+  "main": "index.js",
+  "author": "Dustin Dowell <dustindowell2@gmail.com>",
+  "license": "MIT"
+}

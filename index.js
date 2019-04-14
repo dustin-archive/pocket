@@ -14,10 +14,10 @@ function pocket (opts) {
 
   function wire (state, actions) {
     for (var key in actions) {
-      const action = actions[key]
+      var action = actions[key]
 
       actions[key] = (data) => {
-        let result = action(data)
+        var result = action(data)
 
         typeof result === 'function' && (
           result = result(globalState, actions)

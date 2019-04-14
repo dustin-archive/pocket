@@ -1,8 +1,8 @@
 
-function pocket (opts) {
+function pocket (props) {
   var assign = Object.assign
-  var state = assign({}, opts.state)
-  var actions = assign({}, opts.actions)
+  var state = assign({}, props.state)
+  var actions = assign({}, props.actions)
   var lock = false
 
   for (var key in actions) {
@@ -39,7 +39,7 @@ function pocket (opts) {
     lock = false
 
     requestAnimationFrame(function () {
-      opts.render(state, actions)
+      props.render(state, actions)
     })
   }
 }

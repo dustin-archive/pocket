@@ -1,11 +1,8 @@
 
-function clone (a, b) {
-  return Object.assign({}, a, b)
-}
-
 function pocket (opts) {
-  var globalState = clone(opts.state)
-  var globalActions = wire(globalState, clone(opts.actions))
+  var assign = Object.assign
+  var globalState = assign({}, opts.state)
+  var globalActions = wire(globalState, assign({}, opts.actions))
   var lock = false
 
   render()
@@ -19,13 +16,16 @@ function pocket (opts) {
       actions[key] = function (data) {
         var result = action(data)
 
-        typeof result === 'function' && (
+        if (typeof result === 'function') {
           result = result(globalState, actions)
-        )
+        }
 
         if (result) {
-          globalState = clone(globalState, result)
-          !lock && render(lock = true)
+          globalState = assign({}, globalState, result)
+
+          if (!lock) {
+            render(lock = true)
+          }
         }
 
         return result

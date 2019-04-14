@@ -23,7 +23,7 @@ function pocket (props) {
         result = result(state, actions)
       }
 
-      if (result) {
+      if (result && result !== state) {
         state = assign({}, state, result)
 
         if (!lock) {

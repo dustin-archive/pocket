@@ -1,8 +1,6 @@
 
-var defer = requestAnimationFrame // eslint-disable-line
-
-function clone () {
-  return Object.assign({}, arguments)
+function clone (a, b) {
+  return Object.assign({}, a, b)
 }
 
 function pocket (data) {
@@ -19,12 +17,13 @@ function pocket (data) {
 
     for (var key in actions) {
       target[key] = function (data) {
-        var newState = actions[key](state, actions, data)
+        var result = actions[key](data)
 
+        typeof result === 'function' && (result = result(state, actions))
+        globalState = clone(state, result)
         !lock && render(lock = true)
-        globalState = clone(state, newState)
 
-        return newState
+        return result
       }
     }
 
@@ -33,7 +32,10 @@ function pocket (data) {
 
   function render () {
     lock = false
-    defer(data.bind(globalState, globalActions))
+
+    requestAnimationFrame(function () {
+      data.render(globalState, globalActions)
+    })
   }
 }
 

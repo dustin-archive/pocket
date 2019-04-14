@@ -16,7 +16,7 @@ function pocket (opts) {
     for (var key in actions) {
       var action = actions[key]
 
-      actions[key] = (data) => {
+      actions[key] = function (data) {
         var result = action(data)
 
         typeof result === 'function' && (

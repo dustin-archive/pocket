@@ -1,54 +1,39 @@
 
+var defer = requestAnimationFrame // eslint-disable-line
+
 function clone () {
   return Object.assign({}, arguments)
 }
 
 function pocket (data) {
+  var globalState = clone(data.state)
+  var globalActions = wire(globalState, clone(data.actions))
   var lock = false
-  var state = clone(data.state)
-  var actions = wireActions({
-    state: state,
-    actions: clone(data.actions)
-  })
 
   render()
 
-  return actions
+  return globalActions
 
-  function update (newState) {
-    if (lock === false) {
-      lock = true
-      render()
-    }
-
-    state = clone(state, newState)
-  }
-
-  function defer () {
-    data.render(state, actions)
-  }
-
-  function render () {
-    lock = false
-    requestAnimationFrame(defer) // eslint-disable-line
-  }
-
-  function wireActions (data) {
+  function wire (state, actions) {
     var target = {}
 
-    for (var key in data.actions) {
+    for (var key in actions) {
       target[key] = function (data) {
-        var newState = data.actions[key](data.state, data.actions)
+        var newState = actions[key](state, actions, data)
 
-        if (newState) {
-          update(newState)
-        }
+        !lock && render(lock = true)
+        globalState = clone(state, newState)
 
         return newState
       }
     }
 
     return target
+  }
+
+  function render () {
+    lock = false
+    defer(data.bind(globalState, globalActions))
   }
 }
 

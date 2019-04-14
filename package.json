@@ -12,5 +12,10 @@
   },
   "devDependencies": {
     "rollup": "^1.10.0"
+  },
+  "standard": {
+    "globals": [
+      "requestAnimationFrame"
+    ]
   }
 }

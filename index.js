@@ -1,45 +1,45 @@
 
 function pocket (opts) {
   var assign = Object.assign
-  var globalState = assign({}, opts.state)
-  var globalActions = wire(globalState, assign({}, opts.actions))
+  var state = assign({}, opts.state)
+  var actions = assign({}, opts.actions)
   var lock = false
+
+  for (var key in actions) {
+    wire()
+  }
 
   render()
 
-  return globalActions
+  return actions
 
-  function wire (state, actions) {
-    for (var key in actions) {
-      var action = actions[key]
+  function wire () {
+    var action = actions[key]
 
-      actions[key] = function (data) {
-        var result = action(data)
+    actions[key] = function (data) {
+      var result = action(data)
 
-        if (typeof result === 'function') {
-          result = result(globalState, actions)
-        }
-
-        if (result) {
-          globalState = assign({}, globalState, result)
-
-          if (!lock) {
-            render(lock = true)
-          }
-        }
-
-        return result
+      if (typeof result === 'function') {
+        result = result(state, actions)
       }
-    }
 
-    return actions
+      if (result) {
+        state = assign({}, state, result)
+
+        if (!lock) {
+          render(lock = true)
+        }
+      }
+
+      return result
+    }
   }
 
   function render () {
     lock = false
 
     requestAnimationFrame(function () {
-      opts.render(globalState, globalActions)
+      opts.render(state, actions)
     })
   }
 }

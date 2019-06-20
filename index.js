@@ -2,44 +2,31 @@
 function pocket (props) {
   var assign = Object.assign
   var state = assign({}, props.state)
-  var actions = assign({}, props.actions)
   var lock = false
-
-  for (var key in actions) {
-    wire()
-  }
 
   render()
 
-  return actions
-
-  function wire () {
-    var action = actions[key]
-
-    actions[key] = function (data) {
-      var result = action(data)
-
-      if (typeof result === 'function') {
-        result = result(state, actions)
-      }
+  function dispatch (actions) {
+    for (var i = 0; i < actions.length; i++) {
+      var result = actions[i](state)
 
       if (result && result !== state) {
         state = assign({}, state, result)
-
-        if (!lock) {
-          render(lock = true)
-        }
       }
 
-      return result
+      if (!lock) {
+        render(lock = true)
+      }
     }
   }
+
+  return dispatch
 
   function render () {
     lock = false
 
     requestAnimationFrame(function () {
-      props.render(state, actions)
+      props.render(state)
     })
   }
 }

@@ -4,8 +4,6 @@ function pocket (props) {
   var state = assign({}, props.state)
   var lock = false
 
-  render()
-
   function dispatch (actions) {
     for (var i = 0; i < actions.length; i++) {
       var result = actions[i](state)
@@ -13,22 +11,24 @@ function pocket (props) {
       if (result && result !== state) {
         state = assign({}, state, result)
       }
+    }
 
-      if (!lock) {
-        render(lock = true)
-      }
+    if (!lock) {
+      render(lock = true)
     }
   }
-
-  return dispatch
 
   function render () {
     lock = false
 
     requestAnimationFrame(function () {
-      props.render(state)
+      props.render(state, dispatch)
     })
   }
+
+  render()
+
+  return dispatch
 }
 
 export default pocket

@@ -6,7 +6,7 @@
 ## Install
 
 ```
-npm @finepoint/pocket
+npm github:whaaaley/pocket
 ```
 
 ## Use
@@ -15,8 +15,8 @@ Use alongside your favorite view library.
 
 ```js
 import { patch } from 'superfine'
-import html from '@finepoint/html'
-import pocket from '@finepoint/pocket'
+import { a, div } from 'html'
+import pocket from 'pocket'
 
 const view = (state, actions) => {
   return div([

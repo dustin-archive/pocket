@@ -78,9 +78,7 @@ const test3 = () => {
     }
   })
 
-  const up = state => {
-    return { value: state.value + 1 }
-  }
+  const up = state => ({ value: state.value + 1 })
   const delay = (state) => {
     setTimeout(() => dispatch([ up ]), 1000)
   }

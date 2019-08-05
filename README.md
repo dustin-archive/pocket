@@ -6,7 +6,7 @@
 ## Install
 
 ```
-npm @finepoint/pocket
+npm github:whaaaley/pocket
 ```
 
 ## Use

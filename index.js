@@ -10,11 +10,11 @@ function pocket (props) {
 
       if (result && result !== state) {
         state = assign({}, state, result)
-      }
-    }
 
-    if (!lock) {
-      render(lock = true)
+        if (!lock) {
+          render(lock = true)
+        }
+      }
     }
   }
 

@@ -1,17 +1,17 @@
 {
   "name": "pocket",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A simple state manager.",
-  "main": "index.js",
   "author": "Dustin Dowell <dustindowell2@gmail.com>",
-  "license": "MIT",
+  "license": "ISC",
+  "main": "index.js",
   "scripts": {
     "prep": "rm -rf public && mkdir public && cp test/index.html public/index.html",
-    "rollup": "rollup test/actions.js -o public/test.js -f iife -m",
-    "test": "npm run prep && npm run rollup && open public/index.html"
+    "rollup": "rollup -f iife test/actions.js > public/test.js",
+    "test": "npm run prep && npm run rollup"
   },
   "devDependencies": {
-    "rollup": "^1.10.0"
+    "rollup": "^1.18.0"
   },
   "standard": {
     "globals": [

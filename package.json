@@ -11,7 +11,7 @@
     "test": "npm run prep && npm run rollup"
   },
   "devDependencies": {
-    "rollup": "^1.10.0"
+    "rollup": "^1.18.0"
   },
   "standard": {
     "globals": [

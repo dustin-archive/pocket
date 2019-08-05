@@ -23,8 +23,8 @@ const test1 = () => {
       value: 1
     },
     render: state => {
-      if (i === 0) equal(state.value, 1, 'Test 1: value should be 1')
-      if (i === 1) equal(state.value, 2, 'Test 1: value should be 2')
+      if (i === 0) equal(state.value, 1, 'Test 1A: value should be 1')
+      if (i === 1) equal(state.value, 2, 'Test 1B: value should be 2')
       i++
     }
   })
@@ -72,14 +72,13 @@ const test3 = () => {
     },
     render: state => {
       if (i === 0) equal(state.value, 2, 'Test 3A: value should be 2')
-      if (i === 1) equal(state.value, 2, 'Test 3B: value should be 2')
-      if (i === 2) equal(state.value, 3, 'Test 3C: value should be 3')
+      if (i === 1) equal(state.value, 3, 'Test 3B: value should be 3')
       i++
     }
   })
 
   const up = state => ({ value: state.value + 1 })
-  const delay = (state) => {
+  const delay = () => {
     setTimeout(() => dispatch([ up ]), 1000)
   }
 

@@ -21,7 +21,7 @@ import pocket from 'pocket'
 const view = (state, actions) => {
   return div([
     a({ onclick: () => actions.decrement() }, '-'),
-    div(, state.count),
+    div(state.count),
     a({ onclick: () => actions.increment() }, '+')
   ])
 }

@@ -1,7 +1,7 @@
 
 # pocket
 
-> A simple state manager.
+A simple state manager.
 
 ## Install
 

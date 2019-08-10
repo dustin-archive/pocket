@@ -24,7 +24,7 @@ const increment = state => ({ count: state.count + 1 })
 const view = (state, dispatch) => {
   return div([
     a({ onclick: () => dispatch([decrement]) }, '-'),
-    div(, state.count),
+    div(state.count),
     a({ onclick: () => dispatch([increment]) }, '+')
   ])
 }
